@@ -99,3 +99,48 @@ class Library {
 
 
 }
+
+
+
+class Student {
+	constructor(name, gender, age) {
+		this.name = name;
+		this.gender = gender;
+		this.age = age;
+		this.marks = {};
+	}
+
+	addMark(mark, subject) {
+		if ((mark >= 2) && (mark <= 5)) {
+			if (this.marks[subject] === undefined) {
+				this.marks[subject] = [mark];
+			} else {
+				this.marks[subject].push(mark);
+			}
+		} else {
+			return;
+		}
+	}
+
+	getAverageBySubject(subject) {
+		if (this.marks[subject] === undefined) {
+			return 0;
+		} else {
+			return this.marks[subject].reduce((acc, item) => { return acc + item; }) / this.marks[subject].length;
+		}
+	}
+
+	getAverage() {
+		let summ = 0;
+		if (Object.keys(this.marks).length === 0) {
+			return 0;
+		} else {
+			for (let key in this.marks) {
+				summ += this.marks[key].reduce((acc, item) => { return acc + item; }) / this.marks[key].length;
+			}
+
+			return (summ / Object.keys(this.marks).length);
+		}
+	}
+
+}
